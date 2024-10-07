@@ -51,3 +51,5 @@ if '_' not in guessed_letters:
     print(f"Grattis! Du gissade rätt. Ordet var '{chosen_word}'.")
 else:
     print(f"Tyvärr, du har förlorat. Ordet var '{chosen_word}'.")
+    
+    "hejehej"
