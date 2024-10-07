@@ -1,0 +1,53 @@
+import random
+
+# Lista med ord att välja ifrån
+words = ['äpple', 'banan', 'apelsin', 'jordgubbe', 'päron']
+
+# Slumpa fram ett ord
+chosen_word = random.choice(words)
+
+# Skapa en lista för att hålla koll på gissade bokstäver
+guessed_letters = ['_' for _ in chosen_word]
+attempts = 6  # Antal tillåtna gissningar
+guessed_wrong = []  # Lista för felaktiga gissningar
+
+print("Välkommen till Hänga gubben!")
+print(" ".join(guessed_letters))
+
+while attempts > 0 and '_' in guessed_letters:
+    # Visa återstående försök och felaktiga gissningar
+    print(f"Du har {attempts} försök kvar.")
+    print("Felaktiga gissningar: ", " ".join(guessed_wrong))
+    
+    # Spelaren gissar en bokstav
+    guess = input("Gissa en bokstav: ").lower()
+
+    # Kontrollera om gissningen är en bokstav och endast en bokstav
+    if not guess.isalpha() or len(guess) != 1:
+        print("Ogiltigt val! Du måste gissa på en enda bokstav.")
+        continue
+
+    if guess in guessed_wrong or guess in guessed_letters:
+        print(f"Du har redan gissat '{guess}'!")
+        continue
+    
+    if guess in chosen_word:
+        # Om gissningen är korrekt, uppdatera rätt gissade bokstäver
+        for i, letter in enumerate(chosen_word):
+            if letter == guess:
+                guessed_letters[i] = guess
+        print("Bra gissning!")
+    else:
+        # Om gissningen är fel, minska antal försök och lägg till i felaktiga gissningar
+        attempts -= 1
+        guessed_wrong.append(guess)
+        print(f"Fel gissning! '{guess}' finns inte i ordet.")
+    
+    # Visa det nuvarande ordet
+    print(" ".join(guessed_letters))
+
+# Kontrollera om spelaren vann eller förlorade
+if '_' not in guessed_letters:
+    print(f"Grattis! Du gissade rätt. Ordet var '{chosen_word}'.")
+else:
+    print(f"Tyvärr, du har förlorat. Ordet var '{chosen_word}'.")
