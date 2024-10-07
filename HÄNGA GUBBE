@@ -52,4 +52,3 @@ if '_' not in guessed_letters:
 else:
     print(f"Tyvärr, du har förlorat. Ordet var '{chosen_word}'.")
     
-    "hejehej"
