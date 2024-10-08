@@ -1,10 +1,10 @@
 import random
 
 # Lista med ord att välja ifrån
-words = ['äpple', 'banan', 'apelsin', 'jordgubbe', 'päron']
+ordlista =  ["Vispgrädde", "Ukulele", "Innebandyspelare", "Flaggstång", "Yxa", "Havsfiske", "Prisma", "Landsbygd", "Generositet", "Lyckosam", "Perrong", "Samarbeta", "Välartad"]
 
 # Slumpa fram ett ord
-chosen_word = random.choice(words)
+chosen_word = random.choice(ordlista)
 
 # Skapa en lista för att hålla koll på gissade bokstäver
 guessed_letters = ['_' for _ in chosen_word]

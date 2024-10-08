@@ -3,6 +3,9 @@
 import random
 import time  # Importerar time-modulen för att använda sleep.
 
+def visa_hemskärm():
+    print("Välkommen ")
+
 #Funktion för att visa tärningen baserat på det slumpmässiga talet. Visas med så kallat "ASCII-konst". 
 def print_tärning(number):
     tärning_sidor = {
