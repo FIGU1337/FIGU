@@ -3,7 +3,6 @@
 import random #Importerar random-modulen som genererar slumpmässiga tal.
 import time  #Importerar time-modulen för att använda sleep. Se rad 79.
 
-
 #Variabel för att hålla koll på hur många gånger användaren har gissat rätt på max 7 försök.
 bra_gissningar_i_rad = 0
 
@@ -84,7 +83,6 @@ def spela_tärningsspel():
             print_tärning(spelare_roll_1)
             print_tärning(spelare_roll_2)
             
-
             #Kod för botens runda.
             print("Boten rullar sina två tärningar...")
             time.sleep(2) #Time-modulen som används med funktionen .sleep för att pausa programmet en viss tid, i detta fall 2 sekunder innan botens tärningar visas. Ger en behagligare användning.
