@@ -90,6 +90,8 @@ def spela_tärningsspel():
             time.sleep(2) #Time-modulen som används med funktionen .sleep för att pausa programmet en viss tid, i detta fall 2 sekunder innan botens tärningar visas. Ger en behagligare användning.
             bot_roll_1 = random.randint(1, 6)
             bot_roll_2 = random.randint(1, 6)
+            bot_poäng_per_runda.append(bot_roll_1)
+            bot_poäng_per_runda.append(bot_roll_2)
             bot_total_runda = bot_roll_1 + bot_roll_2
             bot_poäng_per_runda.append(bot_total_runda)
             print(f"Boten fick {bot_roll_1} och {bot_roll_2}, totalt: {bot_total_runda}!")
