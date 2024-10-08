@@ -119,13 +119,13 @@ def spela_tärningsspel():
             print("Tack för att du spelade!")
             break
 
-def spela_gissningsspel():
-    global bra_gissningar_i_rad  #Variabel för att hålla koll på antalet bra gissningar i rad
+def spela_gissatalet():
+    global bra_gissningar_i_rad  #Variabel för att hålla koll på antalet bra gissningar i rad.
     target_number = random.randint(1, 100)
     antal_försök = 0
 
     while True:
-        gissning = input("Gissa ett tal mellan 1 och 100: ")
+        gissning = input("Välkommen till Gissa talet! Gissa ett tal mellan 1 och 100: ")
         if not gissning.isdigit():
             print("Vänligen ange ett giltigt tal!")
             continue
@@ -151,12 +151,12 @@ def spela_gissningsspel():
 
             break
 
-#Här är huvudmenyn, man väljer sitt val med siffrorna 1,2,3 och 4.
+#Huvudmenyn där man väljer sitt val med siffrorna 1,2,3 och 4.
 while True:
     visa_hemskärm()
     print("1: Visa skaparna")
     print("2: Spela Tärningsspelet")
-    print("3: Spela Gissningsspelet")
+    print("3: Spela Gissa talet")
     print("4: Avsluta")
 
     val = input("Välj ett alternativ (1-4): ")
@@ -166,7 +166,7 @@ while True:
     elif val == '2':
         spela_tärningsspel()
     elif val == '3':
-        spela_gissningsspel()
+        spela_gissatalet()
     elif val == '4':
         print("Avslutar spelet...")
         break
