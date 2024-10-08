@@ -1,8 +1,8 @@
-import random
-import time  # Importerar time-modulen för att använda sleep.
+import random #Importerar random-modulen som genererar slumpmässiga tal.
+import time  #Importerar time-modulen för att använda sleep. Se rad 79.
 
 
-# Variabel för att hålla koll på hur många gånger användaren har gissat rätt på max 7 försök
+#Variabel för att hålla koll på hur många gånger användaren har gissat rätt på max 7 försök.
 bra_gissningar_i_rad = 0
 
 def visa_hemskärm():
@@ -15,7 +15,7 @@ def visa_skaparna():
     print("3. Sahar Muradi")
     print("4. Leo Ramirez")
 
-# Funktion för att visa tärningen baserat på det slumpmässiga talet. Visas med så kallad "ASCII-konst".
+#Funktion för att visa tärningen baserat på det slumpmässiga talet. Visas med så kallad "ASCII-konst".
 def print_tärning(number):
     tärning_sidor = {
         1: ("┌─────────┐",
@@ -76,7 +76,7 @@ def spela_tärningsspel():
             print_tärning(spelare_roll_2)
 
             print("Boten rullar sina två tärningar...")
-            time.sleep(1)
+            time.sleep(2) #Time-modulen som används med funktionen sleep för att pausa programmet en viss tid, i detta fall 2 sekunder.
             bot_roll_1 = random.randint(1, 6)
             bot_roll_2 = random.randint(1, 6)
             bot_total = bot_roll_1 + bot_roll_2
