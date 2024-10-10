@@ -149,7 +149,7 @@ def spela_omgang():
 
     #Kontrollera om spelaren vann eller förlorade och skriv ut beskrivningen av ordet
     if '_' not in guessed_letters:
-        print(f"\nGrattis! Du gissade rätt och gubben lever vidare. Ordet var '{chosen_word}' ({chosen_description}).")
+        print(f"\nGrattis! Du gissade rätt och gubben lever vidare :). Ordet var '{chosen_word}' ({chosen_description}).")
     else:
         print(f"\nTyvärr, du har förlorat och gubben är hängd :(. Ordet var '{chosen_word}' ({chosen_description}).")
 
