@@ -22,6 +22,12 @@ def slumpaOrd():
     slumpIndex = random.randint(0, len(ordlista) - 1)
     return ordlista[slumpIndex], betydelse[slumpIndex]
 
+# Testa funktionen slumpaOrd
+testOrd, testBetydelse = slumpaOrd()
+print("Test av funktionen slumpaOrd:")
+print(f"Ord: {testOrd}")
+print(f"Betydelse: {testBetydelse}\n")
+
 # Funktion för att spela en omgång
 def spela_omgang():
     chosen_word, chosen_description = slumpaOrd()
