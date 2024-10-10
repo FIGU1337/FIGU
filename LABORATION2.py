@@ -1,4 +1,6 @@
-import random
+#Ett program där användaren spelar spelet "Hänga Gubben".
+
+import random #Importerar random-modulen som genererar slumpmässiga tal.
 
 #Färdig ordlista och betydelser
 ordlista = ["Vispgrädde", "Ukulele", "Innebandyspelare", "Flaggstång", "Yxa", "Havsfiske", "Prisma",
