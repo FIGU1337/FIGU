@@ -3,8 +3,8 @@ import random
 # Lista med ord att välja ifrån
 ordlista =  ["Vispgrädde", "Ukulele", "Innebandyspelare", "Flaggstång", "Yxa", "Havsfiske", "Prisma", "Landsbygd", "Generositet", "Lyckosam", "Perrong", "Samarbeta", "Välartad"]
 
-# Slumpa fram ett ord
-chosen_word = random.choice(ordlista)
+# Slumpa fram ett ord och gör det till små bokstäver
+chosen_word = random.choice(ordlista).lower()
 
 # Skapa en lista för att hålla koll på gissade bokstäver
 guessed_letters = ['_' for _ in chosen_word]
@@ -51,4 +51,3 @@ if '_' not in guessed_letters:
     print(f"Grattis! Du gissade rätt. Ordet var '{chosen_word}'.")
 else:
     print(f"Tyvärr, du har förlorat. Ordet var '{chosen_word}'.")
-    
