@@ -99,14 +99,14 @@ def visa_gubben(forsok):
 def spela_omgang():
     valt_ord, vald_beskrivning = slumpaOrd()
     valt_ord = valt_ord.lower() #Gör ordet till små bokstäver.
-    gissat = ['_' for _ in valt_ord]
+    gissad_bokstav = ['_' for _ in valt_ord]
     attempts = 6 #Antal tillåtna gissningar.
     gissat_fel = [] #Lista för felaktiga gissningar.
 
     print("\nVälkommen till Hänga gubben!")
-    print(" ".join(gissat))
+    print(" ".join(gissad_bokstav))
 
-    while attempts > 0 and '_' in gissat:
+    while attempts > 0 and '_' in gissad_bokstav:
         #Visa återstående försök och felaktiga gissningar.
         print(f"\nDu har {attempts} försök kvar.")
         print("Felaktiga gissningar: ", " ".join(gissat_fel))
@@ -120,7 +120,7 @@ def spela_omgang():
             print("Ogiltigt val! Du måste gissa på en enda bokstav.")
             continue
 
-        if gissning in gissat_fel or gissning in gissat:
+        if gissning in gissat_fel or gissning in gissad_bokstav:
             print(f"Du har redan gissat '{gissning}'!")
             continue
 
@@ -128,7 +128,7 @@ def spela_omgang():
         if gissning in valt_ord:
             for i, letter in enumerate(valt_ord):
                 if letter == gissning:
-                    gissat[i] = gissning
+                    gissad_bokstav[i] = gissning
             print("\nBra gissning!")
         else:
             attempts -= 1
@@ -136,13 +136,13 @@ def spela_omgang():
             print(f"\nFel gissning! '{gissning}' finns inte i ordet.")
 
         #Visa det nuvarande ordet.
-        print(" ".join(gissat))
+        print(" ".join(gissad_bokstav))
 
     #Visa slutgiltiga versionen av gubben.
     visa_gubben(attempts)
 
     #Kontrollera om spelaren vann eller förlorade och skriv ut beskrivningen av ordet.
-    if '_' not in gissat:
+    if '_' not in gissad_bokstav:
         print(f"\nGrattis! Du gissade rätt och gubben lever vidare :). Ordet var '{valt_ord}' ({vald_beskrivning}).")
     else:
         print(f"\nTyvärr! Du har förlorat och gubben är hängd :(. Ordet var '{valt_ord}' ({vald_beskrivning}).")
