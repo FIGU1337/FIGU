@@ -91,12 +91,6 @@ def slumpaOrd():
     slumpIndex = random.randint(0, len(ordlista) - 1)
     return ordlista[slumpIndex], betydelse[slumpIndex]
 
-#Testa funktionen slumpaOrd.
-testOrd, testBetydelse = slumpaOrd()
-print("Test av funktionen slumpaOrd:")
-print(f"Ord: {testOrd}")
-print(f"Betydelse: {testBetydelse}\n")
-
 #Funktion för att visa gubben baserat på antal misslyckade försök.
 def visa_gubben(forsok):
     print(gubben[6 - forsok])
