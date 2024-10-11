@@ -2,7 +2,7 @@
 
 import random #Importerar random-modulen som genererar slumpmässiga tal.
 
-#Färdig ordlista och betydelser
+#Färdig ordlista och betydelser.
 ordlista = ["Vispgrädde", "Ukulele", "Innebandyspelare", "Flaggstång", "Yxa", "Havsfiske", "Prisma",
             "Landsbygd", "Generositet", "Lyckosam", "Perrong", "Samarbeta", "Välartad"]
 betydelse = ["Uppvispad grädde",
@@ -19,7 +19,7 @@ betydelse = ["Uppvispad grädde",
              "Att arbeta tillsammans mot ett gemensamt mål",
              "Att någon är väluppfostrad, skötsam, eller lovande"]
 
-#ASCII-grafik för gubben med 6 steg (huvud, kropp, två armar, två ben)
+#ASCII-grafik för gubben med 6 steg (huvud, kropp, två armar, två ben).
 gubben = [
     """
       -----
@@ -29,7 +29,7 @@ gubben = [
           |
           |
     =========
-    """,  #0 missar (tom gubbe)
+    """,  #0 missar (tom gubbe).
     """
       -----
       |   |
@@ -38,7 +38,7 @@ gubben = [
           |
           |
     =========
-    """,  #1 miss (huvud)
+    """,  #1 miss (huvud).
     """
       -----
       |   |
@@ -47,7 +47,7 @@ gubben = [
           |
           |
     =========
-    """,  #2 missar (kropp)
+    """,  #2 missar (kropp).
     """
       -----
       |   |
@@ -56,7 +56,7 @@ gubben = [
           |
           |
     =========
-    """,  #3 missar (en arm)
+    """,  #3 missar (en arm).
     """
       -----
       |   |
@@ -65,7 +65,7 @@ gubben = [
           |
           |
     =========
-    """,  #4 missar (två armar)
+    """,  #4 missar (två armar).
     """
       -----
       |   |
@@ -74,7 +74,7 @@ gubben = [
      /    |
           |
     =========
-    """,  #5 missar (ett ben)
+    """,  #5 missar (ett ben).
     """
       -----
       |   |
@@ -83,77 +83,77 @@ gubben = [
      / \  |
           |
     =========
-    """   #6 missar (två ben, hela gubben är ritad)
+    """   #6 missar (två ben, hela gubben är ritad).
 ]
 
-#Funktion för att slumpa ett ord och dess betydelse
+#Funktion för att slumpa ett ord och dess betydelse.
 def slumpaOrd():
     slumpIndex = random.randint(0, len(ordlista) - 1)
     return ordlista[slumpIndex], betydelse[slumpIndex]
 
-#Testa funktionen slumpaOrd
+#Testa funktionen slumpaOrd.
 testOrd, testBetydelse = slumpaOrd()
 print("Test av funktionen slumpaOrd:")
 print(f"Ord: {testOrd}")
 print(f"Betydelse: {testBetydelse}\n")
 
-#Funktion för att visa gubben baserat på antal misslyckade försök
+#Funktion för att visa gubben baserat på antal misslyckade försök.
 def visa_gubben(forsok):
     print(gubben[6 - forsok])
 
-#Funktion för att spela en omgång
+#Funktion för att spela en omgång.
 def spela_omgang():
-    chosen_word, chosen_description = slumpaOrd()
-    chosen_word = chosen_word.lower()  #Gör ordet till små bokstäver
-    guessed_letters = ['_' for _ in chosen_word]
-    attempts = 6  #Antal tillåtna gissningar
-    guessed_wrong = []  #Lista för felaktiga gissningar
+    valt_ord, vald_beskrivning = slumpaOrd()
+    valt_ord = valt_ord.lower() #Gör ordet till små bokstäver.
+    gissat = ['_' for _ in valt_ord]
+    attempts = 6 #Antal tillåtna gissningar.
+    gissat_fel = [] #Lista för felaktiga gissningar.
 
     print("\nVälkommen till Hänga gubben!")
-    print(" ".join(guessed_letters))
+    print(" ".join(gissat))
 
-    while attempts > 0 and '_' in guessed_letters:
-        #Visa återstående försök och felaktiga gissningar
+    while attempts > 0 and '_' in gissat:
+        #Visa återstående försök och felaktiga gissningar.
         print(f"\nDu har {attempts} försök kvar.")
-        print("Felaktiga gissningar: ", " ".join(guessed_wrong))
-        visa_gubben(attempts)  #Visa gubben baserat på antalet försök
+        print("Felaktiga gissningar: ", " ".join(gissat_fel))
+        visa_gubben(attempts) #Visa gubben baserat på antalet försök.
 
-        #Spelaren gissar en bokstav
-        guess = input("Gissa en bokstav: ").lower()
+        #Spelaren gissar en bokstav.
+        gissning = input("Gissa en bokstav: ").lower()
 
-        #Felkontroll för inmatning
-        if not guess.isalpha() or len(guess) != 1:
+        #Felkontroll för inmatning.
+        if not gissning.isalpha() or len(gissning) != 1:
             print("Ogiltigt val! Du måste gissa på en enda bokstav.")
             continue
 
-        if guess in guessed_wrong or guess in guessed_letters:
-            print(f"Du har redan gissat '{guess}'!")
+        if gissning in gissat_fel or gissning in gissat:
+            print(f"Du har redan gissat '{gissning}'!")
             continue
 
-        #Kontrollera om gissningen är korrekt
-        if guess in chosen_word:
-            for i, letter in enumerate(chosen_word):
-                if letter == guess:
-                    guessed_letters[i] = guess
+        #Kontrollera om gissningen är korrekt.
+        if gissning in valt_ord:
+            for i, letter in enumerate(valt_ord):
+                if letter == gissning:
+                    gissat[i] = gissning
             print("\nBra gissning!")
         else:
             attempts -= 1
-            guessed_wrong.append(guess)
-            print(f"\nFel gissning! '{guess}' finns inte i ordet.")
+            gissat_fel.append(gissning)
+            print(f"\nFel gissning! '{gissning}' finns inte i ordet.")
 
-        #Visa det nuvarande ordet
-        print(" ".join(guessed_letters))
+        #Visa det nuvarande ordet.
+        print(" ".join(gissat))
 
-    # Visa slutgiltiga versionen av gubben
+    #Visa slutgiltiga versionen av gubben.
     visa_gubben(attempts)
 
-    #Kontrollera om spelaren vann eller förlorade och skriv ut beskrivningen av ordet
-    if '_' not in guessed_letters:
-        print(f"\nGrattis! Du gissade rätt och gubben lever vidare :). Ordet var '{chosen_word}' ({chosen_description}).")
+    #Kontrollera om spelaren vann eller förlorade och skriv ut beskrivningen av ordet.
+    if '_' not in gissat:
+        print(f"\nGrattis! Du gissade rätt och gubben lever vidare :). Ordet var '{valt_ord}' ({vald_beskrivning}).")
     else:
-        print(f"\nTyvärr, du har förlorat och gubben är hängd :(. Ordet var '{chosen_word}' ({chosen_description}).")
+        print(f"\nTyvärr! Du har förlorat och gubben är hängd :(. Ordet var '{valt_ord}' ({vald_beskrivning}).")
 
-#Huvudprogrammet
+#Huvudprogrammet.
 def huvud_program():
     while True:
         spela_omgang()
@@ -162,5 +162,5 @@ def huvud_program():
             print("Tack för att du spelade!")
             break
 
-#Starta huvudprogrammet
+#Starta huvudprogrammet.
 huvud_program()
