@@ -1,7 +1,13 @@
-#
+#Ett program som tillåter spelaren att spela två olika spel.
+#1 Välj ett alternativ mellan 1 och 4.
+#2 Val nummer 1 visar användaren vilka det är som ligger bakom programmet.
+#3 Val nummer 2 låter användaren spela ett tärningsspel mot en bot.
+#4 Val nummer 3 låter användaren spela ett spel där denne ska gissa rätt tal mellan 1 och 100.
+#5 Val nummer 4 stänger av programmet.
 
-import random #
-import time #
+#Importerar två moduler, ett för att generera slumpmässiga tal och ett för att skapa tidsfördröjningar.
+import random
+import time
 
 #
 bra_gissningar_i_rad = 0
@@ -10,13 +16,13 @@ def visa_hemskärm():
     print("Välkommen till Huvudmenyn!\n")
 
 def visa_skaparna():
-    print("\nSpelet är skapat av:")
+    print("\nProgrammet är skapat av:")
     print("1. Filip Gustafsson")
     print("2. Maid Keranovic")
     print("3. Sahar Muradi")
     print("4. Leo Ramirez")
 
-#
+#Tar emot ett ett nummer mellan 1 och 6 som representerar tärningens resultat.
 def print_tärning(number):
     tärning_sidor = {
         1: ("┌─────────┐",
