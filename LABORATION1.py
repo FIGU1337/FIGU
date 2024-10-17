@@ -1,22 +1,22 @@
-#Ett program där användaren kan spela två olika spel.
+#Detta program låter spelaren spela två olika spel och interagera med en huvudmeny.
+#Syftet med att erbjuda användaren en enkel spelupplevelse där de kan välja mellan att visa skaparna, spela ett tärningspel elelr att gissa ett tal mellan 1 och 100.
 
-import random #Importerar random-modulen som genererar slumpmässiga tal.
-import time  #Importerar time-modulen för att använda sleep. Se rad 79.
+#Används för att generera slumpmässiga tal och ett för att skapa tidsfördröjningar längre ner i koden.
+import random
+import time
 
-#Variabel för att hålla koll på hur många gånger användaren har gissat rätt på max 7 försök.
-bra_gissningar_i_rad = 0
+bra_gissningar_i_rad = 0 #Används för att hålla koll på antal bra gissningar i rad, i spelet "Gissa telet".
 
-def visa_hemskärm():
-    print("Välkommen till Huvudmenyn!\n")
+def visa_huvudmenyn():
+    print("Välkommen till Huvudmenyn!\n") #Visar huvudmenyn för att ge användaren följande valmöjligheter.
 
-def visa_skaparna():
-    print("\nSpelet är skapat av:")
+def visa_skaparna(): #Visar användaren vilka som ligger bakom grogrammet
+    print("\nProgrammet är skapat av:")
     print("1. Filip Gustafsson")
     print("2. Maid Keranovic")
-    print("3. Sahar Muradi")
-    print("4. Leo Ramirez")
+    print("3. Leo Ramirez")
 
-#Funktion för att visa tärningen baserat på det slumpmässiga talet. Visas med så kallad "ASCII-konst".
+#ASCII-konst som visar ger spelaren en känsla av att kasta faktiska tärningar och får då en bättre spelupplevelse.
 def print_tärning(number):
     tärning_sidor = {
         1: ("┌─────────┐",
@@ -53,27 +53,34 @@ def print_tärning(number):
     for line in tärning_sidor[number]:
         print(line)
 
+#Definerar funktionen från menyvalet "Tärningspelet".
 def spela_tärningsspel():
-      
-    spelare_poäng_per_runda = [] #Lista för att lagra spelarens poäng per runda.
-    bot_poäng_per_runda = [] #Lista för att lagra botens poäng per runda.
     
+    #Listor som sparar spelarens och botens poäng per runda. Behövs för att vinnaren ska kunna koras.  
+    spelare_poäng_per_runda = []
+    bot_poäng_per_runda = []
+    
+    #Loopen som ska hålla igång spelet baserat på hur många rundor spelaren har valt att spela.
     while True:
+        
+        #Spelet frågar användaren om antalet rundor för att anpassa spelets längd.
         rundor = input("Välkommen till Tärningsspelet! Hur många rundor vill du spela? (ange ett heltal): ")
-        if not rundor.isdigit() or int(rundor) <= 0:
+        if not rundor.isdigit() or int(rundor) <= 0: #Spelaren ska inte kunna ange ett negativt antal rundor.
             print("Ange ett giltigt antal rundor större än 0.")
             continue
+        
+        rundor = int(rundor) #Konverterar variabeln "rundor" från att vara en sträng till ett heltal (integer).
+        #Lagrar antalet vunna rundor och totala poängen för att programmet ska kunna kora en vinnare och visa snittpoäng.!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        spelare_score = 0
+        bot_score = 0
+        total_spelare_poäng = 0
+        total_bot_poäng = 0
 
-        rundor = int(rundor)
-        spelare_score = 0 #Håller koll på hur många rundor användaren har vunnit.
-        bot_score = 0 #Håller koll på hur många rundor boten har vunnit.
-        total_spelare_poäng = 0 #Summerar användarens totala poäng.
-        total_bot_poäng = 0 #Summerar botens totala poäng.
-
+        #Forloopen som exekverar att spelet körs inom "range + 1" för antal rundor spelaren vill spela
         for rundor_number in range(1, rundor + 1):
             print(f"\nRunda {rundor_number} av {rundor}")
             
-            #Kod för spelarens runda.
+            #Delen där spelarens tärningar kastas och rundans poäng summeras. Tärningsansikten visas i ASCII-konst.
             input("Tryck Enter för att rulla dina två tärningar...")
             spelare_roll_1 = random.randint(1, 6)
             spelare_roll_2 = random.randint(1, 6)
@@ -83,9 +90,9 @@ def spela_tärningsspel():
             print_tärning(spelare_roll_1)
             print_tärning(spelare_roll_2)
             
-            #Kod för botens runda.
+            #Delen där spelarens tärningar kastas och rundans poäng summeras. Tärningsansikten visas i ASCII-konst.
             print("Boten rullar sina två tärningar...")
-            time.sleep(2) #Time-modulen som används med funktionen .sleep för att pausa programmet en viss tid, i detta fall 2 sekunder innan botens tärningar visas. Ger en behagligare användning.
+            time.sleep(2) #Tidsördröjningen på 2 sekunder för att ge en bättre spelupplevelse.
             bot_roll_1 = random.randint(1, 6)
             bot_roll_2 = random.randint(1, 6)
             bot_total_runda = bot_roll_1 + bot_roll_2
@@ -93,9 +100,10 @@ def spela_tärningsspel():
             print(f"Boten fick {bot_roll_1} och {bot_roll_2}, totalt: {bot_total_runda}!")
             print_tärning(bot_roll_1)
             print_tärning(bot_roll_2)
-
+            
+            #Totalpoängen räknas ihop och vinnaren av rundan koras (eller så blir det oavgjort). Först runda och sen total.
             total_spelare_poäng += spelare_total_runda
-            total_bot_poäng += bot_total_runda   
+            total_bot_poäng += bot_total_runda  
 
             if spelare_total_runda > bot_total_runda:
                 print("Du vinner denna omgång!")
@@ -105,7 +113,6 @@ def spela_tärningsspel():
                 bot_score += 1
             else:
                 print("Det är oavgjort!")
-
         print("\nSlutresultat:")
         print(f"Du: {spelare_score} vunna rundor")
         print(f"Bot: {bot_score} vunna rundor")
@@ -117,43 +124,44 @@ def spela_tärningsspel():
         else:
             print("Spelet slutade oavgjort!")
 
+        #Variabler för att räkna ut spelarnas snittpoängen till en decimal och detta printas ut i slutet.
         snitt_spelare_poäng = total_spelare_poäng / rundor
         snitt_bot_poäng = total_bot_poäng / rundor
-
         print("\nSnittpoäng per runda:")
         print(f"Din snittpoäng: {snitt_spelare_poäng:.1f}")
         print(f"Botens snittpoäng: {snitt_bot_poäng:.1f}")
         
-        #Hitta spelarens bästa och sämsta runda.Man lägger till 1 för att få rätt runda
+        #Variabler för att räkna ut vilken runda som var spelaren sämsta respektive bästa.
         bästa_poäng = max(spelare_poäng_per_runda)
         bästa_runda = spelare_poäng_per_runda.index(bästa_poäng) + 1
-
         sämsta_poäng = min(spelare_poäng_per_runda)
         sämsta_runda = spelare_poäng_per_runda.index(sämsta_poäng) + 1
         
         bästa_poäng_bot = max(bot_poäng_per_runda)
         bästa_runda_bot = bot_poäng_per_runda.index(bästa_poäng_bot) + 1
-
         sämsta_poäng_bot = min(bot_poäng_per_runda)
         sämsta_runda_bot = bot_poäng_per_runda.index(sämsta_poäng_bot) + 1
 
-        #Informerar spelaren om den bästa och sämsta rundan följt av botens bästa och sämsta runda.
+        #Printar strängar som talar om resultatet av ovan variabler.
         print(f"\nDin bästa runda var runda {bästa_runda} med {bästa_poäng} poäng.")
         print(f"Din sämsta runda var runda {sämsta_runda} med {sämsta_poäng} poäng.")
         
         print(f"Botens bästa runda var runda {bästa_runda_bot} med {bästa_poäng_bot} poäng.")
         print(f"Botens sämsta runda var runda {sämsta_runda_bot} med {sämsta_poäng_bot} poäng.")
 
+        #Inputfunktion där spelaren för välja att spela igen eller att avsluta spelet.
         spela_igen = input("\nVill du spela igen? (ja/nej): ").lower()
         if spela_igen != "ja":
             print("Tack för att du spelade!")
             break
-
+#Definerar funktionen från menyvalet "Gissa talet".
 def spela_gissatalet():
-    global bra_gissningar_i_rad #Variabel för att hålla koll på antalet bra gissningar i rad. Nyckelordet global används för att tala om för Python att den här variabeln finns på en global nivå.
-    target_number = random.randint(1, 100)
+    global bra_gissningar_i_rad #Modul som håller koll på hur många gånger spelaren gör en bra gissning (under 6 försök) i rad.
+    target_number = random.randint(1, 100) #Används till att generera ett slumpat tal, ett nytt tal genereras varje omgång.
     antal_försök = 0
-
+    tidigare_gissat = set() #Operation för att omgångsbaserat spara tidigare gissade tal. 
+    
+    #Whileloopen som håller igång spelet tills spelaren har gissat rätt tal och utvärderar hur bra strategi som användes.
     while True:
         gissning = input("Välkommen till Gissa talet! Gissa ett tal mellan 1 och 100: ")
         if not gissning.isdigit():
@@ -161,13 +169,20 @@ def spela_gissatalet():
             continue
 
         gissning = int(gissning)
+        
+        if gissning in tidigare_gissat:
+            print(f"Du har redan gissat på det talet {gissning}, försök med ett annat tal!")
+            continue
+
+        tidigare_gissat.add(gissning) #Variabeln som ser till att "gissning" läggs i set (kontrollräkning).
         antal_försök += 1
 
+        #Satser som kontrollerar om det gissade talet är för lågt, högt eller är rätt.
         if gissning < target_number:
             print("För lågt!")
         elif gissning > target_number:
             print("För högt!")
-        else:
+        else: #Kontroll för om antal rätt gissningar håller sig inom satt variabel för att klassas som en bra gissningsstrategi.
             print(f"Grattis! Du gissade rätt efter {antal_försök} försök.")
             if antal_försök <= 7:
                 print("Bra jobbat!")
@@ -175,15 +190,14 @@ def spela_gissatalet():
             else:
                 print("Så många försök borde det inte ta, försök igen.")
                 bra_gissningar_i_rad = 0
-
             if bra_gissningar_i_rad >= 3:
                 print("Du använder bevisligen en bra gissningsstrategi!")
 
             break
 
-#Huvudmenyn där man väljer sitt val med siffrorna 1,2,3 och 4. Menyn placeras sist i koden pga. det logiska flödet och eftersom menyn ska anropa reste
+#Whileloopen för huvudmenyn, den är igång tills att användaren väljer ett av alternativen (1-4). 
 while True:
-    visa_hemskärm()
+    visa_huvudmenyn()
     print("1: Visa skaparna")
     print("2: Spela Tärningsspelet")
     print("3: Spela Gissa talet")
