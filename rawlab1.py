@@ -1,11 +1,9 @@
-#Ett program som tillåter spelaren att spela två olika spel.
 #Detta program låter spelaren spela två olika spel och interagera med en huvudmeny.
 #Syftet med att erbjuda användaren en enkel spelupplevelse där de kan välja mellan att visa skaparna, spela ett tärningspel elelr att gissa ett tal mellan 1 och 100.
 
 #Används för att generera slumpmässiga tal och ett för att skapa tidsfördröjningar längre ner i koden.
 import random
 import time
-
 
 bra_gissningar_i_rad = 0 #Används för att hålla koll på antal bra gissningar i rad, i spelet "Gissa telet".
 
@@ -56,27 +54,34 @@ def print_tärning(number):
     for line in tärning_sidor[number]:
         print(line)
 
+#Definerar funktionen i blocket som tillhör spelet "Tärningspelet", här lagras all information om just det spelet.
 def spela_tärningsspel():
-      
-    spelare_poäng_per_runda = [] #
-    bot_poäng_per_runda = [] #
     
+    #Listor som sparar spelarens och botens poäng per runda. Behövs för att vinnaren ska kunna koras.  
+    spelare_poäng_per_runda = []
+    bot_poäng_per_runda = []
+    
+    #Loopen som ska hålla igång spelet baserat på hur många rundor spelaren har valt att spela.
     while True:
+        
+        #Spelet frågar användaren om antalet rundor för att anpassa spelets längd.
         rundor = input("Välkommen till Tärningsspelet! Hur många rundor vill du spela? (ange ett heltal): ")
-        if not rundor.isdigit() or int(rundor) <= 0:
+        if not rundor.isdigit() or int(rundor) <= 0: #Spelaren ska inte kunna ange ett negativt antal rundor.
             print("Ange ett giltigt antal rundor större än 0.")
             continue
-
+        
+        #
         rundor = int(rundor)
-        spelare_score = 0 #
-        bot_score = 0 #
-        total_spelare_poäng = 0 #
-        total_bot_poäng = 0 #
+        spelare_score = 0
+        bot_score = 0
+        
+        total_spelare_poäng = 0
+        total_bot_poäng = 0
 
         for rundor_number in range(1, rundor + 1):
             print(f"\nRunda {rundor_number} av {rundor}")
             
-            #
+            #Startar omgången och två tärningar kastas.
             input("Tryck Enter för att rulla dina två tärningar...")
             spelare_roll_1 = random.randint(1, 6)
             spelare_roll_2 = random.randint(1, 6)
@@ -86,9 +91,9 @@ def spela_tärningsspel():
             print_tärning(spelare_roll_1)
             print_tärning(spelare_roll_2)
             
-            #
+            #Efter 2 sekunders fördröjningen kastas botens tärningar.
             print("Boten rullar sina två tärningar...")
-            time.sleep(2) #
+            time.sleep(2) #Fördröjningen för att ge en bättre spelupplevelse.
             bot_roll_1 = random.randint(1, 6)
             bot_roll_2 = random.randint(1, 6)
             bot_total_runda = bot_roll_1 + bot_roll_2
@@ -96,9 +101,10 @@ def spela_tärningsspel():
             print(f"Boten fick {bot_roll_1} och {bot_roll_2}, totalt: {bot_total_runda}!")
             print_tärning(bot_roll_1)
             print_tärning(bot_roll_2)
-
+            
+            #Vinnaren av rundan utses.
             total_spelare_poäng += spelare_total_runda
-            total_bot_poäng += bot_total_runda   
+            total_bot_poäng += bot_total_runda  
 
             if spelare_total_runda > bot_total_runda:
                 print("Du vinner denna omgång!")
@@ -151,12 +157,14 @@ def spela_tärningsspel():
         if spela_igen != "ja":
             print("Tack för att du spelade!")
             break
-
+#
 def spela_gissatalet():
-    global bra_gissningar_i_rad #
-    target_number = random.randint(1, 100)
+    global bra_gissningar_i_rad #Håller koll på hur många gånger spelaren gissar rätt på under 6 försök i rad.
+    target_number = random.randint(1, 100) #Används till att generera ett slumpat tal, ett nytt tal genereras varje omgång.
     antal_försök = 0
-
+    tidigare_gissat = set() #
+    
+    #Loopen som håller igång spelet tills spelaren har gissat rätt tal och utvärderar hur bra strategi som användes.
     while True:
         gissning = input("Välkommen till Gissa talet! Gissa ett tal mellan 1 och 100: ")
         if not gissning.isdigit():
@@ -164,6 +172,13 @@ def spela_gissatalet():
             continue
 
         gissning = int(gissning)
+        
+        if gissning in tidigare_gissat:
+            print(f"Du har redan gissat på det talet {gissning}, försök med ett annat tal!")
+            continue
+    
+        tidigare_gissat.add(gissning)
+        
         antal_försök += 1
 
         if gissning < target_number:
