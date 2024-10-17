@@ -29,7 +29,7 @@ gubben = [
           |
           |
     =========
-    """,  #0 missar (tom gubbe).
+    """,  #0 missar (ingen gubbe).
     """
       -----
       |   |
@@ -83,7 +83,7 @@ gubben = [
      / \  |
           |
     =========
-    """   #6 missar (två ben, hela gubben är ritad).
+    """   #6 missar (två ben, hela gubben är nu ritad).
 ]
 
 #Funktion för att slumpa ett ord och dess betydelse.
@@ -110,7 +110,7 @@ def spela_omgang():
         #Visa återstående försök och felaktiga gissningar.
         print(f"\nDu har {attempts} försök kvar.")
         print("Felaktiga gissningar: ", " ".join(gissat_fel))
-        visa_gubben(attempts) #Visa gubben baserat på antalet försök.
+        visa_gubben(attempts) #Visa gubben i ASCII-konst baserat på antalet försök.
 
         #Spelaren gissar en bokstav.
         gissning = input("Gissa en bokstav: ").lower()
