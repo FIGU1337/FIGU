@@ -54,7 +54,7 @@ def print_tärning(number):
         print(line)
 
 #Definerar funktionen från menyvalet "Tärningspelet".
-def spela_tärningsspel():
+def spela_tärningsspel(rundor):
     
     #Listor som sparar spelarens och botens poäng per runda. Behövs för att vinnaren ska kunna koras.  
     spelare_poäng_per_runda = []
@@ -154,6 +154,13 @@ def spela_tärningsspel():
         if spela_igen != "ja":
             print("Tack för att du spelade!")
             break
+def menyval_2(): #Funktion som kallar på tärningsspelet
+    rundor = int(input("Välkommen till Tärningsspelet! Hur många rundor vill du spela? (ange ett heltal): "))
+    if rundor > 0:
+        spela_tärningsspel(rundor)
+    elif not rundor.isdigit() or int(rundor) <= 0:
+        print("Ange ett giltigt antal rundor större än 0.")
+        
 #Definerar funktionen från menyvalet "Gissa talet".
 def spela_gissatalet():
     global bra_gissningar_i_rad #Modul som håller koll på hur många gånger spelaren gör en bra gissning (under 6 försök) i rad.
@@ -208,7 +215,7 @@ while True:
     if val == '1':
         visa_skaparna()
     elif val == '2':
-        spela_tärningsspel()
+        menyval_2()
     elif val == '3':
         spela_gissatalet()
     elif val == '4':
