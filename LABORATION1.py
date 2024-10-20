@@ -2,6 +2,7 @@
 #Syftet med att erbjuda användaren en enkel spelupplevelse där de kan välja mellan att visa skaparna, spela ett tärningspel elelr att gissa ett tal mellan 1 och 100.
 
 #Importmoduler för hantering av slumpmässiga tal respektive tidshantering.import random
+import random
 import time
 
 #Räkning för antal bra gissningar i rad, funktion för spelet "Gissa talet".
@@ -66,12 +67,6 @@ def spela_tärningsspel(rundor):
     
     #Loopen som ska hålla igång spelet baserat på hur många rundor spelaren har valt att spela.
     while True:
-        
-        #Spelet frågar användaren om antalet rundor för att anpassa spelets längd.
-        rundor = input("Välkommen till Tärningsspelet! Hur många rundor vill du spela? (ange ett heltal): ")
-        if not rundor.isdigit() or int(rundor) <= 0: #Spelaren ska inte kunna ange ett negativt antal rundor.
-            print("Ange ett giltigt antal rundor större än 0.")
-            continue
         
         rundor = int(rundor) #Konverterar variabeln "rundor" från att vara en sträng till ett heltal (integer).
         #Lagrar antalet vunna rundor och totala poängen för att programmet ska kunna kora en vinnare och visa snittpoäng.!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
