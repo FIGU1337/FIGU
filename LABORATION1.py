@@ -1,22 +1,24 @@
 #Detta program låter spelaren spela två olika spel och interagera med en huvudmeny.
 #Syftet med att erbjuda användaren en enkel spelupplevelse där de kan välja mellan att visa skaparna, spela ett tärningspel elelr att gissa ett tal mellan 1 och 100.
 
-#Används för att generera slumpmässiga tal och ett för att skapa tidsfördröjningar längre ner i koden.
-import random
+#Importmoduler för hantering av slumpmässiga tal respektive tidshantering.import random
 import time
 
-bra_gissningar_i_rad = 0 #Används för att hålla koll på antal bra gissningar i rad, i spelet "Gissa telet".
+#Räkning för antal bra gissningar i rad, funktion för spelet "Gissa talet".
+bra_gissningar_i_rad = 0
 
+#Funktionen huvudmeny: print välkomstmeddelande
 def visa_huvudmenyn():
-    print("Välkommen till Huvudmenyn!\n") #Visar huvudmenyn för att ge användaren följande valmöjligheter.
+    print("Välkommen till Huvudmenyn!\n") 
 
-def visa_skaparna(): #Visar användaren vilka som ligger bakom grogrammet
+#Definierar menyval 1 "visa skaparna", print skaparna av programmet.
+def visa_skaparna():
     print("\nProgrammet är skapat av:")
     print("1. Filip Gustafsson")
     print("2. Maid Keranovic")
     print("3. Leo Ramirez")
 
-#ASCII-konst som visar ger spelaren en känsla av att kasta faktiska tärningar och får då en bättre spelupplevelse.
+#ASCII-konst som visar tärningar för Tärningsspelet.
 def print_tärning(number):
     tärning_sidor = {
         1: ("┌─────────┐",
@@ -50,10 +52,12 @@ def print_tärning(number):
             "│  ●   ●  │",
             "└─────────┘")
     }
+    
+    #Funktion som väljer rätt tärning baserat på slagen siffra 1-6.: Print
     for line in tärning_sidor[number]:
         print(line)
 
-#Definerar funktionen från menyvalet "Tärningspelet".
+#Definerar valet "Tärningspelet"
 def spela_tärningsspel(rundor):
     
     #Listor som sparar spelarens och botens poäng per runda. Behövs för att vinnaren ska kunna koras.  

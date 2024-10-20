@@ -1,21 +1,38 @@
-#Ett program där användaren spelar spelet "Hänga Gubben".
-#Startar programmet.
-#Importerar random-modulen för att kunna generera slumpmässiga tal till spelet.
-#Definerar en lista med ord och en med ordens betydelse.
+"""PSEUDOKOD
 
-#Funktion för att slumpa ett ord och dess betydelse:
-#1. Väljer ett slumpat index från lsitan med ord.
-#2. Returnerar det valda ordet och dess betydelse.
+STARTA PROGRAM
 
-#Funktion för att visa gubben baserat på antalet misslyckade försök.
+IMPORTERA random
 
-#Funktion för att spela en omgång av spelet:
-#1. Slumpar ett ord och tillhörande betydelse.
-#2. Skapar en lista med tomma streck som motsvarar antalet bokstäver i det valda ordet.
-#3. Låter användaren gissa bokstäver tills alla är rätt eller tills alla förök tagit slut.
-#4. Om en bokstav är felaktig, minska antalet återstående försök och lägg till gissad bokstav i en lista med felaktiga gissningar.
-#5. Om alla bokstäver gissas korrekt, vinner spelaren. Om försöken tar slut, förlorar spelaren.
-#6. Visar ordets betydelse efter varje omgång.
+DEFINIERA lista med ord och betydelser
+
+ASCIIgrafik för gubben
+
+FUNKTIONSDEFINTION slumpaOrd:
+    SLUMPA ett index
+    RETURNA ord och betydelse
+
+FUNKTIONSDEFINITION spelaomgang:
+    SLUMPA ord och betydelse
+    INITIERA gissade bokstäver och antal försök
+    MEDAN försök > 0 OCH '' finns i gissade bokstäver:
+        PRINTA försök kvar och felaktiga gissningar
+        BE om gissning
+        OM gissningen är giltig:
+           OM rätt gissning:
+                UPPDATERA gissade bokstäver
+            ANNARS:
+                MINSKA försök
+        PRINTA aktuella gissade bokstäver
+    PRINTA resultat
+
+FUNKTIONSDEFINITION huvud_program:
+    MEDAN SANT:
+        KÖR spela_omgang
+        BE om att spela igen
+        OM inte "ja": AVSLUTA
+
+STARTA huvud_program"""
 
 import random 
 
