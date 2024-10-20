@@ -46,7 +46,7 @@ gubben = [
           |
           |
     =========
-    """,  #0 missar (ingen gubbe).
+    """,  
     """
       -----
       |   |
@@ -55,7 +55,7 @@ gubben = [
           |
           |
     =========
-    """,  #1 miss (huvud).
+    """,  
     """
       -----
       |   |
@@ -64,7 +64,7 @@ gubben = [
           |
           |
     =========
-    """,  #2 missar (kropp).
+    """,  
     """
       -----
       |   |
@@ -73,7 +73,7 @@ gubben = [
           |
           |
     =========
-    """,  #3 missar (en arm).
+    """,  
     """
       -----
       |   |
@@ -82,7 +82,7 @@ gubben = [
           |
           |
     =========
-    """,  #4 missar (två armar).
+    """,  
     """
       -----
       |   |
@@ -91,7 +91,7 @@ gubben = [
      /    |
           |
     =========
-    """,  #5 missar (ett ben).
+    """,  
     """
       -----
       |   |
@@ -100,7 +100,7 @@ gubben = [
      / \  |
           |
     =========
-    """   #6 missar (två ben, hela gubben är nu ritad).
+    """   
 ]
 
 #Funktion för att slumpa ett ord och dess betydelse.
