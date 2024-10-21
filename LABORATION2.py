@@ -103,7 +103,6 @@ def spela_omgang():
     attempts = 6                                #Antal tillåtna gissningar.
     gissat_fel = []                             #Lista för felaktiga gissningar.
 
-
     print("\nVälkommen till Hänga gubben!")
     print(" ".join(gissad_bokstav))
 
