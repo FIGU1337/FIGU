@@ -1,6 +1,6 @@
 """PSEUDOKOD
 
-SKAPARE: Filip Gustafsson, Leo Ramirezm och Maid Keranovic.
+SKAPARE: Filip Gustafsson, Leo Ramirez och Maid Keranovic.
 
 STARTA PROGRAM
 
