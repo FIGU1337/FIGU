@@ -8,11 +8,9 @@ import time
 # Räkning för antal bra gissningar i rad, funktion för spelet "Gissa talet".
 bra_gissningar_i_rad = 0
 
-
 # Funktionen huvudmeny: print välkomstmeddelande
 def visa_huvudmenyn():
     print("Välkommen till Huvudmenyn!\n")
-
 
 # Definierar menyval 1 "visa skaparna", print skaparna av programmet.
 def v1_visa_skaparna():
@@ -20,7 +18,6 @@ def v1_visa_skaparna():
     print("1. Filip Gustafsson")
     print("2. Maid Keranovic")
     print("3. Leo Ramirez")
-
 
 # ASCII-konst som visar tärningar för Tärningsspelet.
 def print_tarning(number):
@@ -60,7 +57,6 @@ def print_tarning(number):
     # Funktion som väljer rätt tärning baserat på slagen siffra 1-6.: Print
     for line in tarning_sidor[number]:
         print(line)
-
 
 # Definerar valet "Tärningspelet"
 def v2_spela_tarningsspel():
@@ -173,7 +169,6 @@ def v2_spela_tarningsspel():
             print("Tack för att du spelade!")
             break
 
-
 # Definerar funktionen från menyvalet "Gissa talet".
 def v3_spela_gissatalet():
     global bra_gissningar_i_rad  # Modul som håller koll på hur många gånger spelaren gör en bra gissning (under 6 försök) i rad.
@@ -215,7 +210,6 @@ def v3_spela_gissatalet():
                 print("Du använder bevisligen en bra gissningsstrategi!")
 
             break
-
 
 """Det bör aldrig ta fler än 7 gissningar, även om vi jobbar från 1-200,
  då om vi halverar antal möjligheter nog antal gånger så bör vi komma fram till rätt svar på 7 gissningar. 
