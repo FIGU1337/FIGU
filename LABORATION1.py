@@ -1,5 +1,5 @@
-# Detta program låter spelaren spela två olika spel och interagera med en huvudmeny.
-# Syftet med att erbjuda användaren en enkel spelupplevelse där de kan välja mellan att visa skaparna, spela ett tärningspel eller att gissa ett tal mellan 1 och 100.
+# Skapad av: Filip Gustafsson, Maid Keranovic och Leo Ramirez.
+# Detta program låter spelaren interagera med en meny med fyra val varav två är spel.
 
 # Importmoduler för hantering av slumpmässiga tal respektive tidshantering.import random
 import random
@@ -15,7 +15,7 @@ def visa_huvudmenyn():
 
 
 # Definierar menyval 1 "visa skaparna", print skaparna av programmet.
-def visa_skaparna():
+def v1_visa_skaparna():
     print("\nProgrammet är skapat av:")
     print("1. Filip Gustafsson")
     print("2. Maid Keranovic")
@@ -63,7 +63,7 @@ def print_tarning(number):
 
 
 # Definerar valet "Tärningspelet"
-def spela_tarningsspel():
+def v2_spela_tarningsspel():
     # Variabler för poängräkning av rundor.
     spelare_poang_per_runda = []
     bot_poang_per_runda = []
@@ -175,7 +175,7 @@ def spela_tarningsspel():
 
 
 # Definerar funktionen från menyvalet "Gissa talet".
-def spela_gissatalet():
+def v3_spela_gissatalet():
     global bra_gissningar_i_rad  # Modul som håller koll på hur många gånger spelaren gör en bra gissning (under 6 försök) i rad.
     target_number = random.randint(1, 100)  # Används till att generera ett slumpat tal, för var omgång.
     antal_forsok = 0
@@ -232,11 +232,11 @@ while True:
     val = input("Välj ett alternativ (1-4): ")
 
     if val == '1':
-        visa_skaparna()
+        v1_visa_skaparna()
     elif val == '2':
-        spela_tarningsspel()
+        v2_spela_tarningsspel()
     elif val == '3':
-        spela_gissatalet()
+        v3_spela_gissatalet()
     elif val == '4':
         print("Avslutar spelet...")
         break
