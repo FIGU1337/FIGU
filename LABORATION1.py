@@ -90,8 +90,8 @@ def v2_spela_tarningsspel():
             print(f"\nRunda {rundor_number} av {rundor}")
 
             """Inputfunktion för att kasta tärningen - tryck enter:
-            randintmodul för beräkning av tärningskast:
-            summering av poängen för kastet. Runda respektive poängtotal. 
+            Randintmodul för beräkning av tärningskast:
+            Rummering av poängen för kastet. Runda respektive poängtotal. 
             Tärningsansikten visas i ASCII-konst."""
             input("Tryck Enter för att rulla dina två tärningar...")
             spelare_roll_1 = random.randint(1, 6)
@@ -102,10 +102,10 @@ def v2_spela_tarningsspel():
             print_tarning(spelare_roll_1)
             print_tarning(spelare_roll_2)
 
-            """Funktion för botens kast - print visar det är botens tur:
+            """Funktion för botens kast - print visar att det är botens tur:
             Timemodul för en mindre fördröjning på botens kast:
-            randintmodul för beräkning av tärningskast:
-            summering av poängen för kastet. Runda respektive poängtotal. 
+            Randintmodul för beräkning av tärningskast:
+            Rummering av poängen för kastet. Runda respektive poängtotal. 
             Tärningsansikten visas i ASCII-konst."""
             print("Boten rullar sina två tärningar...")
             time.sleep(2)
@@ -135,7 +135,7 @@ def v2_spela_tarningsspel():
         print(f"Du: {spelare_score} vunna rundor")
         print(f"Bot: {bot_score} vunna rundor")
 
-        # Printfunktioner totalt spelresultat.
+        # Printfunktioner för det totala spelresultatet.
         if spelare_score > bot_score:
             print(f"Du är den totala vinnaren med {spelare_score - bot_score} rundor!")
         elif spelare_score < bot_score:
@@ -150,12 +150,12 @@ def v2_spela_tarningsspel():
         print(f"Din snittpoäng: {snitt_spelare_poang:.1f}")
         print(f"Botens snittpoäng: {snitt_bot_poang:.1f}")
 
-        # Variabler uträkning av vilken runda som var spelaren sämsta respektive bästa.
+        # Variabler för uträkning av vilken runda som var spelaren sämsta respektive bästa.
         basta_poang = max(spelare_poang_per_runda)
         basta_runda = spelare_poang_per_runda.index(basta_poang) + 1
         samsta_poang = min(spelare_poang_per_runda)
         samsta_runda = spelare_poang_per_runda.index(samsta_poang) + 1
-        # Variabler uträkning av vilken runda som var botens sämsta respektive bästa.
+        # Variabler för uträkning av vilken runda som var botens sämsta respektive bästa.
         basta_poang_bot = max(bot_poang_per_runda)
         basta_runda_bot = bot_poang_per_runda.index(basta_poang_bot) + 1
         samsta_poang_bot = min(bot_poang_per_runda)
@@ -167,7 +167,7 @@ def v2_spela_tarningsspel():
         print(f"Botens bästa runda var runda {basta_runda_bot} med {basta_poang_bot} poäng.")
         print(f"Botens sämsta runda var runda {samsta_runda_bot} med {samsta_poang_bot} poäng.")
 
-        # Inputfunktion där spelaren för välja att spela igen eller att avsluta spelet.
+        # Inputfunktion där spelaren får välja att spela igen eller att avsluta spelet.
         spela_igen = input("\nVill du spela igen? (ja/nej): ").lower()
         if spela_igen != "ja":
             print("Tack för att du spelade!")
@@ -177,9 +177,9 @@ def v2_spela_tarningsspel():
 # Definerar funktionen från menyvalet "Gissa talet".
 def v3_spela_gissatalet():
     global bra_gissningar_i_rad  # Modul som håller koll på hur många gånger spelaren gör en bra gissning (under 6 försök) i rad.
-    target_number = random.randint(1, 100)  # Används till att generera ett slumpat tal, för var omgång.
+    target_number = random.randint(1, 100)  # Variabel och operation som används till att generera ett slumpat tal, för varje omgång.
     antal_forsok = 0
-    tidigare_gissat = set()  # Operation för att omgångsbaserat spara tidigare gissade tal.
+    tidigare_gissat = set()  # Variabel och operation för att omgångsbaserat spara tidigare gissade tal.
 
     # Whileloop som håller igång spelet tills spelaren har gissat rätt tal.
     while True:
