@@ -1,5 +1,5 @@
-# Detta program låter spelaren spela två olika spel och interagera med en huvudmeny.
-# Syftet med att erbjuda användaren en enkel spelupplevelse där de kan välja mellan att visa skaparna, spela ett tärningspel eller att gissa ett tal mellan 1 och 100.
+# Skapad av: Filip Gustafsson, Maid Keranovic och Leo Ramirez.
+# Detta program låter spelaren interagera med en meny med fyra val varav två är spel.
 
 # Importmoduler för hantering av slumpmässiga tal respektive tidshantering.import random
 import random
