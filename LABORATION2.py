@@ -1,42 +1,5 @@
-"""PSEUDOKOD
-
-SKAPARE: Filip Gustafsson, Leo Ramirez och Maid Keranovic.
-
-STARTA PROGRAM
-
-IMPORTERA random
-
-DEFINIERA lista med ord och betydelser
-
-ASCIIgrafik för gubben
-
-FUNKTIONSDEFINTION slumpaOrd:
-    SLUMPA ett index
-    RETURNA ord och betydelse
-
-FUNKTIONSDEFINITION spelaomgang:
-    SLUMPA ord och betydelse
-    INITIERA gissade bokstäver och antal försök
-    MEDAN försök > 0 OCH '' finns i gissade bokstäver:
-        PRINTA försök kvar och felaktiga gissningar
-        BE om gissning
-        OM gissningen är giltig:
-           OM rätt gissning:
-                UPPDATERA gissade bokstäver
-            ANNARS:
-                MINSKA försök
-        PRINTA aktuella gissade bokstäver
-    PRINTA resultat
-
-FUNKTIONSDEFINITION huvud_program:
-    MEDAN SANT:
-        KÖR spela_omgang
-        BE om att spela igen
-        OM inte "ja": AVSLUTA
-
-STARTA huvud_program"""
-
-import random #Import random-modulen som genererar slumpmässiga tal för valet av slumpord.
+#Import random-modulen som genererar slumpmässiga tal för valet av slumpord.
+import random
 
 #Den färdiga ordlistan från uppgiften med tillhörande betydelser.
 ordlista = ["Vispgrädde", "Ukulele", "Innebandyspelare", "Flaggstång", "Yxa", "Havsfiske", "Prisma",
