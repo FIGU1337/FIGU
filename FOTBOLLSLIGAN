@@ -1,0 +1,311 @@
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+
+class Program
+{
+    static List<Team> teams = new List<Team>();
+    static List<Match> matches = new List<Match>();
+    static string dataFilePath = "sportsliga.txt";
+
+    static void Main(string[] args)
+    {
+        LoadDataFromFile(); // Ladda data från fil vid start
+        Console.WriteLine("Välkommen till Sportsligan!");
+
+        while (true)
+        {
+            Console.Clear();
+            Console.WriteLine("===== Huvudmeny =====");
+            Console.WriteLine("1. Visa alla lag");
+            Console.WriteLine("2. Lägg till ett lag");
+            Console.WriteLine("3. Spela en match");
+            Console.WriteLine("4. Visa alla matcher");
+            Console.WriteLine("5. Ta bort ett lag");
+            Console.WriteLine("6. Avsluta och spara");
+            Console.Write("Välj: ");
+            string choice = Console.ReadLine();
+
+            switch (choice)
+            {
+                case "1": ShowAllTeams(); break;
+                case "2": AddTeam(); break;
+                case "3": PlayMatch(); break;
+                case "4": ShowAllMatches(); break;
+                case "5": RemoveTeam(); break;
+                case "6":
+                    SaveDataToFile();
+                    return;
+                default:
+                    Console.WriteLine("Ogiltigt val, försök igen.");
+                    PressEnterToContinue();
+                    break;
+            }
+        }
+    }
+
+    static void ShowAllTeams()
+    {
+        Console.Clear();
+        Console.WriteLine("===== Alla Lag =====");
+        foreach (var team in teams)
+        {
+            Console.WriteLine($"{team.Name} - Arena: {team.Arena} - Vinster: {team.Wins} - Förluster: {team.Losses} - Oavgjorda: {team.Draws} - Odds: {team.Odds}");
+        }
+        PressEnterToContinue();
+    }
+
+    static void AddTeam()
+    {
+        Console.Clear();
+        Console.WriteLine("===== Lägg till ett nytt lag =====");
+        Console.Write("Ange lagets namn: ");
+        string name = Console.ReadLine();
+
+        if (teams.Any(t => t.Name.Equals(name, StringComparison.OrdinalIgnoreCase)))
+        {
+            Console.WriteLine("Laget finns redan!");
+            PressEnterToContinue();
+            return;
+        }
+
+        Console.Write("Ange lagets arena: ");
+        string arena = Console.ReadLine();
+
+        Console.Write("Ange lagets odds: ");
+        if (!double.TryParse(Console.ReadLine(), out double odds))
+        {
+            Console.WriteLine("Ogiltigt odds, försök igen.");
+            PressEnterToContinue();
+            return;
+        }
+
+        teams.Add(new Team(name, arena, odds));
+        SaveDataToFile();
+        Console.WriteLine($"{name} har lagts till.");
+        PressEnterToContinue();
+    }
+
+    static void PlayMatch()
+    {
+        Console.Clear();
+        Console.WriteLine("===== Spela en Match =====");
+
+        if (teams.Count < 2)
+        {
+            Console.WriteLine("Det finns inte tillräckligt många lag för att spela en match.");
+            PressEnterToContinue();
+            return;
+        }
+
+        Console.WriteLine("Välj två lag att mötas:");
+        for (int i = 0; i < teams.Count; i++)
+        {
+            Console.WriteLine($"{i + 1}. {teams[i].Name}");
+        }
+
+        Console.Write("Välj hemmalag (nummer): ");
+        if (!int.TryParse(Console.ReadLine(), out int homeIndex) || homeIndex < 1 || homeIndex > teams.Count)
+        {
+            Console.WriteLine("Ogiltigt val.");
+            PressEnterToContinue();
+            return;
+        }
+
+        Console.Write("Välj bortalag (nummer): ");
+        if (!int.TryParse(Console.ReadLine(), out int awayIndex) || awayIndex < 1 || awayIndex > teams.Count || awayIndex == homeIndex)
+        {
+            Console.WriteLine("Ogiltigt val.");
+            PressEnterToContinue();
+            return;
+        }
+
+        Team homeTeam = teams[homeIndex - 1];
+        Team awayTeam = teams[awayIndex - 1];
+
+        Console.Write($"Ange mål för {homeTeam.Name}: ");
+        if (!int.TryParse(Console.ReadLine(), out int homeGoals))
+        {
+            Console.WriteLine("Ogiltigt antal mål.");
+            PressEnterToContinue();
+            return;
+        }
+
+        Console.Write($"Ange mål för {awayTeam.Name}: ");
+        if (!int.TryParse(Console.ReadLine(), out int awayGoals))
+        {
+            Console.WriteLine("Ogiltigt antal mål.");
+            PressEnterToContinue();
+            return;
+        }
+
+        Match match = new Match(homeTeam, awayTeam, homeGoals, awayGoals);
+        matches.Add(match);
+
+        // Uppdatera vinster, förluster och oavgjorda matcher
+        if (homeGoals > awayGoals)
+        {
+            homeTeam.Wins++;  // Hemmalaget vinner
+            awayTeam.Losses++; // Bortalaget förlorar
+        }
+        else if (awayGoals > homeGoals)
+        {
+            awayTeam.Wins++;  // Bortalaget vinner
+            homeTeam.Losses++; // Hemmalaget förlorar
+        }
+        else
+        {
+            // Oavgjort
+            homeTeam.Draws++;
+            awayTeam.Draws++;
+        }
+
+        SaveDataToFile();
+        Console.WriteLine($"Match spelad: {homeTeam.Name} {homeGoals} - {awayGoals} {awayTeam.Name}");
+        PressEnterToContinue();
+    }
+
+    static void ShowAllMatches()
+    {
+        Console.Clear();
+        Console.WriteLine("===== Alla Matcher =====");
+        if (matches.Count == 0)
+        {
+            Console.WriteLine("Inga matcher har spelats ännu.");
+        }
+        else
+        {
+            foreach (var match in matches)
+            {
+                Console.WriteLine($"{match.HomeTeam.Name} {match.HomeGoals} - {match.AwayGoals} {match.AwayTeam.Name} (Arena: {match.HomeTeam.Arena})");
+            }
+        }
+        PressEnterToContinue();
+    }
+
+    static void RemoveTeam()
+    {
+        Console.Clear();
+        Console.WriteLine("===== Ta bort ett lag =====");
+        Console.WriteLine("Välj ett lag att ta bort:");
+
+        for (int i = 0; i < teams.Count; i++)
+        {
+            Console.WriteLine($"{i + 1}. {teams[i].Name}");
+        }
+
+        Console.Write("Välj lag (nummer): ");
+        if (!int.TryParse(Console.ReadLine(), out int teamIndex) || teamIndex < 1 || teamIndex > teams.Count)
+        {
+            Console.WriteLine("Ogiltigt val.");
+            PressEnterToContinue();
+            return;
+        }
+
+        Team teamToRemove = teams[teamIndex - 1];
+
+        // Ta bort alla matcher som innehåller det här laget
+        matches.RemoveAll(m => m.HomeTeam == teamToRemove || m.AwayTeam == teamToRemove);
+
+        // Ta bort laget från listan
+        teams.Remove(teamToRemove);
+
+        SaveDataToFile();
+        Console.WriteLine($"{teamToRemove.Name} har tagits bort.");
+        PressEnterToContinue();
+    }
+
+    static void LoadDataFromFile()
+    {
+        if (!File.Exists(dataFilePath)) return;
+
+        try
+        {
+            var lines = File.ReadAllLines(dataFilePath);
+            foreach (var line in lines)
+            {
+                var parts = line.Split(';');
+                if (parts.Length == 6) // Lag: Namn;Arena;Vinster;Förluster;Oavgjorda;Odds
+                {
+                    teams.Add(new Team(parts[0], parts[1], double.Parse(parts[5]), int.Parse(parts[2]), int.Parse(parts[3]), int.Parse(parts[4])));
+                }
+                else if (parts.Length == 5) // Match: Hemmalag;Bortalag;HemmaMål;BortaMål;Arena
+                {
+                    Team homeTeam = teams.FirstOrDefault(t => t.Name == parts[0]);
+                    Team awayTeam = teams.FirstOrDefault(t => t.Name == parts[1]);
+                    if (homeTeam != null && awayTeam != null)
+                    {
+                        matches.Add(new Match(homeTeam, awayTeam, int.Parse(parts[2]), int.Parse(parts[3])));
+                    }
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Fel vid inläsning av fil: {ex.Message}");
+        }
+    }
+
+    static void SaveDataToFile()
+    {
+        var lines = new List<string>();
+
+        // Spara lag
+        foreach (var team in teams)
+        {
+            lines.Add($"{team.Name};{team.Arena};{team.Wins};{team.Losses};{team.Draws};{team.Odds}");
+        }
+
+        // Spara matcher
+        foreach (var match in matches)
+        {
+            lines.Add($"{match.HomeTeam.Name};{match.AwayTeam.Name};{match.HomeGoals};{match.AwayGoals};{match.HomeTeam.Arena}");
+        }
+
+        File.WriteAllLines(dataFilePath, lines);
+        Console.WriteLine("Data sparad.");
+    }
+
+    static void PressEnterToContinue()
+    {
+        Console.WriteLine("\nTryck på Enter för att fortsätta...");
+        Console.ReadLine();
+    }
+}
+
+class Team
+{
+    public string Name { get; }
+    public string Arena { get; }
+    public int Wins { get; set; }
+    public int Losses { get; set; }
+    public int Draws { get; set; } // Ny egenskap för oavgjorda matcher
+    public double Odds { get; }
+
+    public Team(string name, string arena, double odds, int wins = 0, int losses = 0, int draws = 0)
+    {
+        Name = name;
+        Arena = arena;
+        Odds = odds;
+        Wins = wins;
+        Losses = losses;
+        Draws = draws;
+    }
+}
+
+class Match
+{
+    public Team HomeTeam { get; }
+    public Team AwayTeam { get; }
+    public int HomeGoals { get; }
+    public int AwayGoals { get; }
+
+    public Match(Team homeTeam, Team awayTeam, int homeGoals, int awayGoals)
+    {
+        HomeTeam = homeTeam;
+        AwayTeam = awayTeam;
+        HomeGoals = homeGoals;
+        AwayGoals = awayGoals;
+    }
+}
